@@ -1,3 +1,38 @@
+function trackEvent(eventType, eventProperties) {
+  // Log the event type and properties to the console
+  const event = {
+    eventType: eventType,
+    eventProperties: eventProperties,
+    sessionId: getSessionId(),
+  }
+  console.log("Event Tracked",event)
+
+  // Save the event to local storage
+  const events = JSON.parse(localStorage.getItem('events')) || []
+  events.push(event)
+localStorage.setItem('events', JSON.stringify(events))
+}
+
+function getSessionId() {
+  let sessionId = localStorage.getItem('sessionId')
+  if (!sessionId) {
+    sessionId = Math.random().toString(36).substring(2, 15)
+    localStorage.setItem('sessionId', sessionId)
+  }
+  return sessionId
+  
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  //track page event
+  trackEvent('pageview',{
+    //colon is asigning the property to the object
+    url: window.location.href,
+    timeStamp: new Date().toISOString()
+  });
+  // console.log('Page loaded',trackEvent);
+});
+
 /*
 window is an object that represents the browser window
 window.addEventListener is a method that listens for events on the window object
@@ -23,11 +58,12 @@ window.addEventListener('load', function () {
     //event listener to the document object. 
     //The document object represents the entire HTML document loaded in the browser.
     // Generate a unique ID for each click and session
-let clickID = 0;
-let sessionID = Math.random().toString(36).substring(2, 15);
+let clickNo = 0;
+let clicksessionId = Math.random().toString(36).substring(2, 15);
+
 document.addEventListener('click', function (event) {
-  clickID++;
-  console.log(`Session ID: ${sessionID}, Click ID: ${clickID}, Timestamp: ${new Date().toLocaleString()}`);
+  clickNo++;
+  console.log(`Click Session ID: ${clicksessionId}, Click NO: ${clickNo}, Timestamp: ${new Date().toLocaleString()}`);
 })
     
     // Track Form Submissions
