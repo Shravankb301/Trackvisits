@@ -4,74 +4,78 @@ function trackEvent(eventType, eventProperties) {
     eventType: eventType,
     eventProperties: eventProperties,
     sessionId: getSessionId(),
-  }
-  console.log("Event Tracked",event)
+    timestamp: new Date().toISOString()
+  };
+  console.log("Event Tracked", event);
 
   // Save the event to local storage
-  const events = JSON.parse(localStorage.getItem('events')) || []
-  events.push(event)
-localStorage.setItem('events', JSON.stringify(events))
+  const events = JSON.parse(localStorage.getItem('events')) || [];
+  events.push(event);
+  localStorage.setItem('events', JSON.stringify(events));
+
+  fetch('http://127.0.0.1:5500/trackEvent', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(event)
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Event sent to server:', data);
+    })
+    .catch(error => {
+      console.error('Error sending event to server:', error);
+    });
 }
 
 function getSessionId() {
-  let sessionId = localStorage.getItem('sessionId')
+  let sessionId = localStorage.getItem('sessionId');
   if (!sessionId) {
-    sessionId = Math.random().toString(36).substring(2, 15)
-    localStorage.setItem('sessionId', sessionId)
+    sessionId = Math.random().toString(36).substring(2, 15);
+    localStorage.setItem('sessionId', sessionId);
   }
-  return sessionId
-  
+  return sessionId;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  //track page event
-  trackEvent('pageview',{
-    //colon is asigning the property to the object
+  // Track page event
+  trackEvent('pageview', {
     url: window.location.href,
     timeStamp: new Date().toISOString()
   });
-  // console.log('Page loaded',trackEvent);
 });
 
-/*
-window is an object that represents the browser window
-window.addEventListener is a method that listens for events on the window object
-'load' is the event that is being listened for
-the second argument is a callback function that will be called when the event occurs
-the callback function will display an alert with the message "It's loaded!"
-*/
-
-//log the page visit count with time stamp
-
+// Log the page visit count with timestamp
 window.addEventListener('load', function () {
-    //localStorage is a part of the Web Storage API that provides a way to store data on the client-side in the web browser
-        let count = localStorage.getItem('visitCount') || 0
-        count++
-        localStorage.setItem('visitCount', count)
-        console.log(`You have visited this page ${count} times.`)
-        console.log(`Last visited: ${new Date().toLocaleString()}`)
-        
-      })
-    
-    //Track Click Events
-    
-    //event listener to the document object. 
-    //The document object represents the entire HTML document loaded in the browser.
-    // Generate a unique ID for each click and session
+  let count = localStorage.getItem('visitCount') || 0;
+  count++;
+  localStorage.setItem('visitCount', count);
+  console.log(`You have visited this page ${count} times.`);
+  console.log(`Last visited: ${new Date().toLocaleString()}`);
+});
+
+// Track Click Events
 let clickNo = 0;
-let clicksessionId = Math.random().toString(36).substring(2, 15);
+let clickSessionId = Math.random().toString(36).substring(2, 15);
 
 document.addEventListener('click', function (event) {
   clickNo++;
-  console.log(`Click Session ID: ${clicksessionId}, Click NO: ${clickNo}, Timestamp: ${new Date().toLocaleString()}`);
-})
-    
-    // Track Form Submissions
-    document.addEventListener('submit', function (event) {
-        console.log('Form submitted')
-        // You can access the form data using event.target
-        // For example, to access the value of an input field with name 'username':
-        // const username = event.target.username.value
-    })
+  console.log(`Click Session ID: ${clickSessionId}, Click NO: ${clickNo}, Timestamp: ${new Date().toLocaleString()}`);
+  trackEvent('click', {
+    clickNo: clickNo,
+    clickSessionId: clickSessionId,
+    timestamp: new Date().toISOString()
+  });
+});
 
-
+// Track Form Submissions
+document.addEventListener('submit', function (event) {
+  event.preventDefault();
+  console.log('Form submitted');
+  const formData = Object.fromEntries(new FormData(event.target));
+  trackEvent('formSubmission', {
+    formData: formData,
+    timestamp: new Date().toISOString()
+  });
+});

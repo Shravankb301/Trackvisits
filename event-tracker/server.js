@@ -1,31 +1,43 @@
-//importing required packages 
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const cors = require('cors');
 
-// creating and instance of express
 const app = express();
-const port = 3000;
-
 app.use(bodyParser.json());
+app.use(cors());
 
-//MySQL connection setup
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'myuser',
-    password: 'password',
-    database: 'Analytics'
+var db = mysql.createConnection({
+  host: "localhost",
+  user:"root",
+  password: "Password@123", 
+  database: "analytics",
+  
+})
+
+db.connect((err) => {
+  if (err) {
+    console.error('Error connecting to database', err);
+    return;
+  }
+  console.log('Connected to SQL!');
 });
 
-/*
-mysql> create user 'myuser'@'localhost' identified by 'password';
-mysql> grant all privileges on analytics.* to 'myuser'@'localhost';
-*/
-connection.connect((err) => {
-    if (err) {
-        console.log('Error connecting to Db');
-        return;
+app.post('/trackEvent', (req,res) =>{
+  const {eventType, eventProperties, sessionId, timestamp} = req.body;
+
+  const query = 'INSERT INTO events (eventType, eventProperties, sessionID, timestamp) VALUES (?, ?, ?, ?)';  
+  db.query(query, [eventType, JSON.stringify(eventProperties), sessionID, timestamp], (err, result) => {
+    if(err){
+      console.error('Error saving event to database', err);
+      res.status(500).send('Error saving event to database');
+      return
     }
-    console.log('Connection established');
-});
+    res.send({success: true, id: result.insertId});
+  })
+})
 
+const PORT = 4560;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
