@@ -13,7 +13,7 @@ function trackEvent(eventType, eventProperties) {
   events.push(event);
   localStorage.setItem('events', JSON.stringify(events));
 
-  fetch('http://127.0.0.1:5500/trackEvent', {
+  fetch('http://127.0.0.1:4560/trackEvent', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

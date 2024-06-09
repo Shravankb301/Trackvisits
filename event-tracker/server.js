@@ -25,9 +25,10 @@ db.connect((err) => {
 
 app.post('/trackEvent', (req,res) =>{
   const {eventType, eventProperties, sessionId, timestamp} = req.body;
-
-  const query = 'INSERT INTO events (eventType, eventProperties, sessionID, timestamp) VALUES (?, ?, ?, ?)';  
-  db.query(query, [eventType, JSON.stringify(eventProperties), sessionID, timestamp], (err, result) => {
+  let date = new Date(timestamp);
+  let mysqlFormattedDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+  const query = 'INSERT INTO events (event_type, event_properties, session_id, timestamp) VALUES (?, ?, ?, ?)';  
+  db.query(query, [eventType, JSON.stringify(eventProperties), sessionId, mysqlFormattedDate], (err, result) => {
     if(err){
       console.error('Error saving event to database', err);
       res.status(500).send('Error saving event to database');
