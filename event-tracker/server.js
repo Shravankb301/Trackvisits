@@ -38,6 +38,19 @@ app.post('/trackEvent', (req,res) =>{
   })
 })
 
+app.get('/heatMap', (req, res) => {
+  const url = req.query.url;
+  const query = 'SELECT x, y FROM events WHERE event_type = "click" AND url = ?'; 
+  db.query(query, [url], (err, result) => {
+    if(err){
+      console.error('Error fetching events from database', err);
+      res.status(500).send('Error fetching events from database');
+      return
+    }
+    res.send(result);
+  });
+});
+
 const PORT = 4560;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
