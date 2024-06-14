@@ -1,0 +1,6 @@
+Field,Type,Null,Key,Default,Extra
+id,int,NO,PRI,NULL,auto_increment
+event_type,varchar(255),NO,,NULL,
+event_properties,json,NO,,NULL,
+session_id,varchar(255),NO,,NULL,
+timestamp,datetime,YES,,CURRENT_TIMESTAMP,DEFAULT_GENERATED

@@ -1,7 +1,15 @@
 import Image from "next/image";
 
+import router from 'next/router'
+import Link from "next/link"
+import React from "react";
+
+
 export default function Home() {
+    //move to a differnt page on click of the button  
+    
   return (
+    
 
     <div>
       {/* Navbar */}
@@ -20,17 +28,20 @@ export default function Home() {
         </div>
       </div>
       {/* Center */}
-      <div data-theme="dark" className="hero min-h-screen bg-base-200">
-        <div className="hero-content text-center">
-          <div className="max-w-md">
+      <div data-theme="dark" className="hero min-h-screen bg-base-200" >
+        <div className=" text-center">
+          <div className="max-w-md" style={{ marginTop: '-500px' }}>
             <h1 className="text-5xl font-bold">SHOW YOUR USER THE BEST YOU HAVE</h1>
             <p className="py-6">One script will bring increase the average time a user spends on your site</p>
+            <Link href="/LogIn">
             <button className="btn btn-primary">Get Started</button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
+
+    
   );
 }
   
-

@@ -1,0 +1,15 @@
+Things I'm learning :
+
+Arrow functions: Are a compact alternative to traditional functions.
+
+randomFunction(){
+};
+/* This is a declared function and they are not excuted immediatly but only when called explicitly 
+like randomfunction(); they are usually written to execute somewhere else */
+
+Sef evoking functions: They are functions that are anonymous with no name and are executed rifht
+after declaration. They are enclosed in a parenthesis which are 
+
+JSON stands for: Java Script Object Notation and JSON is an array of objects
+
+
