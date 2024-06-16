@@ -26,7 +26,7 @@ export default function Home() {
           <div className="max-w-md">
             <h1 className="text-5xl font-bold">SHOW YOUR USER THE BEST YOU HAVE</h1>
             <p className="py-6">One script will bring increase the average time a user spends on your site</p>
-            <button className="btn btn-primary" >Get Started</button>
+            <Link href="/Dashboard"><button className="btn btn-primary" >Get Started</button></Link>
           </div>
         </div>
       </div>
