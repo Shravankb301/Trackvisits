@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from 'next/link';
 
 
+
 export default function Home() {
   return (
     <div>
       {/* Navbar */}
-      <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
+      {/* <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
         <div className="flex container mx-auto">
           <div className="flex-auto">
             <span className="text-4xl font-bold ">HeatScope</span>
@@ -19,7 +20,7 @@ export default function Home() {
             <button className="btn  btn-warning">Log in</button>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Center */}
       <div data-theme="dark" className="hero min-h-screen bg-base-200">
         <div className="hero-content text-center">
