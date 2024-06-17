@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from 'next/link';
 // import "./globals.css";
 // import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
@@ -29,6 +30,7 @@ import { Inter } from "next/font/google";
 
 import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import './globals.css';
+import { push } from "firebase/database";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -39,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
         <div className="flex container mx-auto">
           <div className="flex-auto">
-            <span className="text-4xl font-bold ">HeatScope</span>
+            <Link href={"/"}><span className="text-4xl font-bold ">HeatScope</span></Link>
           </div>
           <div className="flex-auto px-2 mx-2">
             <a className="btn btn-ghost btn-sm rounded-btn">Demo</a>
@@ -50,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SignedOut>
               <SignInButton />
             </SignedOut>
-            <SignedIn>
+            <SignedIn >
               <UserButton showName/>
             </SignedIn>
           </div>

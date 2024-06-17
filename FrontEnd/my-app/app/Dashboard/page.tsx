@@ -1,7 +1,7 @@
 export default function Page() {
   return (
     <div className="">
-      <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
+      {/* <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
         <div className="flex container mx-auto">
           <div className="flex-auto">
             <span className="text-4xl font-bold">HeatScope</span>
@@ -11,7 +11,7 @@ export default function Page() {
             <a className="btn btn-ghost btn-sm rounded-btn">@user</a>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="join">
         <input className="input input-bordered join-item btn-outline btn-warning" placeholder="www.example.com" />
@@ -26,11 +26,11 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="stats shadow">
+      {/* <div className="stats shadow">
         <div className="stat">
           <div className="stat-figure text-primary"></div>
         </div>
-      </div>
+      </div> */}
 
       <div className="stats shadow">
         <div className="stat">
