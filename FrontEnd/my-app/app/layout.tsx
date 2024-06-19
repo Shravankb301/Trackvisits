@@ -1,30 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from 'next/link';
-// import "./globals.css";
-// import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
-// const inter = Inter({ subsets: ["latin"] });
-
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode
-// }) {
-//   return (
-//     <html lang="en">
-//          <body>
-//            <header>
-//            </header>
-//            <main>
-//              {children}
-//            </main>
-//          </body>
-//        </html>
-      
-//   );
-// }
 
 /// Testing 
 

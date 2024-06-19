@@ -1,18 +1,8 @@
+import { auth, currentUser } from "@clerk/nextjs/server";
 export default function Page() {
   return (
     <div className="">
-      {/* <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
-        <div className="flex container mx-auto">
-          <div className="flex-auto">
-            <span className="text-4xl font-bold">HeatScope</span>
-          </div>
-          <div className="flex-auto px-2 mx-2">
-            <a className="btn btn-ghost btn-sm rounded-btn">Welcome</a>
-            <a className="btn btn-ghost btn-sm rounded-btn">@user</a>
-          </div>
-        </div>
-      </div> */}
-
+      
       <div className="join">
         <input className="input input-bordered join-item btn-outline btn-warning" placeholder="www.example.com" />
         <button className="btn join-item rounded-r-full btn-warning">ADD</button>
