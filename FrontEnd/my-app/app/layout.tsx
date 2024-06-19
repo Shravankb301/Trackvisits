@@ -55,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SignedIn >
               <UserButton showName/>
             </SignedIn>
+           
           </div>
         </div>
         

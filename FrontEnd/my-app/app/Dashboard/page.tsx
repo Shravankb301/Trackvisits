@@ -26,11 +26,7 @@ export default function Page() {
         </div>
       </div>
 
-      {/* <div className="stats shadow">
-        <div className="stat">
-          <div className="stat-figure text-primary"></div>
-        </div>
-      </div> */}
+      
 
       <div className="stats shadow">
         <div className="stat">
@@ -83,7 +79,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="card w-96 bg-base-100 shadow-xl">
+        {/* <div className="card w-96 bg-base-100 shadow-xl">
           <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
           <div className="card-body">
             <h2 className="card-title">Shoes!</h2>
@@ -92,7 +88,7 @@ export default function Page() {
               <button className="btn btn-primary">Buy Now</button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
