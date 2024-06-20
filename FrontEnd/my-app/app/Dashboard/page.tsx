@@ -1,9 +1,17 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
+
+import { ClerkProvider, useUser, SignIn } from '@clerk/clerk-react';
+import DisplayUserDetails from './userDetails';
 export default function Page() {
+
+
+  
+  // if (!user) return null;
   return (
-    <div className="">
+    
+    <div className="justify-content: center text-4xl">
+      <DisplayUserDetails />
       
-      <div className="join">
+      <div className="">
         <input className="input input-bordered join-item btn-outline btn-warning" placeholder="www.example.com" />
         <button className="btn join-item rounded-r-full btn-warning">ADD</button>
       </div>
@@ -14,9 +22,7 @@ export default function Page() {
           <div className="stat-value">89,400</div>
           <div className="stat-desc">21% more than last month</div>
         </div>
-      </div>
-
-      
+      </div>     
 
       <div className="stats shadow">
         <div className="stat">
@@ -54,32 +60,7 @@ export default function Page() {
           <div className="stat-desc text-secondary">21 item selected</div>
         </div>
       </div>
-
-      <div className="mockup-window border bg-base-300">
-        <div className="flex justify-center px-4 py-16 bg-base-200">TESTING IN BROWSER!</div>
-
-        <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div>
-
-        {/* <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
-            </div>
-          </div>
-        </div> */}
-      </div>
+      
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       <html lang="en">
         <body>
-          <header>
+          <header >
           <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
         <div className="flex container mx-auto">
           <div className="flex-auto">
@@ -24,13 +24,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a className="btn btn-ghost btn-sm rounded-btn">Demo</a>
             <a className="btn btn-ghost btn-sm rounded-btn">Feedback</a>
           </div>
-          <div className="flex-none px-auto py-2 my-2 mx-auto">
+          <div >
             {/* <button className="btn  btn-warning">Log in</button> */}
             <SignedOut>
               <SignInButton />
             </SignedOut>
             <SignedIn >
-              <UserButton showName/>
+              <UserButton showName={true}/>
             </SignedIn>
            
           </div>
