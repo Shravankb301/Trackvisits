@@ -1,49 +1,68 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Link from 'next/link';
+import "./globals.css";
+import {
+  RegisterLink,
+  LoginLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import Link from "next/link";
 
+export const metadata = {
+  title: "Kinde Auth",
+  description: "Kinde with NextJS App Router",
+};
 
-/// Testing 
-
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
-import './globals.css';
-import { push } from "firebase/database";
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { isAuthenticated, getUser } = getKindeServerSession();
+  const user = await getUser();
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body>
-          <header >
-          <div data-theme="dark" className="navbar shadow-lg bg-base-200 text-neutral-content">
-        <div className="flex container mx-auto">
-          <div className="flex-auto">
-            <Link href={"/"}><span className="text-4xl font-bold ">HeatScope</span></Link>
-          </div>
-          <div className="flex-auto px-2 mx-2">
-            <a className="btn btn-ghost btn-sm rounded-btn">Demo</a>
-            <a className="btn btn-ghost btn-sm rounded-btn">Feedback</a>
-          </div>
-          <div >
-            {/* <button className="btn  btn-warning">Log in</button> */}
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn >
-              <UserButton showName={true}/>
-            </SignedIn>
-           
-          </div>
-        </div>
+    <html lang="en">
+      <body>
+        <header>
+          <nav className="nav container">
+            <h1 className="text-display-3">Heatscope</h1>
+            <div>
+              {!(await isAuthenticated()) ? (
+                <>
+                  <LoginLink className="btn btn-ghost sign-in-btn">
+                    Sign in
+                  </LoginLink>
+                  <RegisterLink className="btn btn-dark">Sign up</RegisterLink>
+                </>
+              ) : (
+                <div className="profile-blob">
+                  {user?.picture ? (
+                    <img
+                      className="avatar"
+                      src={user?.picture}
+                      alt="user profile avatar"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div className="avatar">
+                      {user?.given_name?.[0]}
+                      {user?.family_name?.[0]}
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-heading-2">
+                      Hi {user?.given_name} {user?.family_name},
+                    </p>
+
+                    <LogoutLink className="text-subtle">Log out</LogoutLink>
+                  </div>
+                </div>
+              )}
+            </div>
+          </nav>
+        </header>
+        <main>{children}</main>
         
-      </div>
-            
-          </header>
-          <main>
-            {children}
-          </main>
-        </body>
-      </html>
-    </ClerkProvider>
+      </body>
+    </html>
   );
 }

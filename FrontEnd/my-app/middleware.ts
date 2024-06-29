@@ -1,12 +1,12 @@
-import { clerkMiddleware , createRouteMatcher } from "@clerk/nextjs/server";
+import {
+  authMiddleware,
+  withAuth,
+} from "@kinde-oss/kinde-auth-nextjs/middleware";
 
-const isProtectedRoute = createRouteMatcher(['/Dashboard(.*)']);
-export default clerkMiddleware((auth, req, res) => {
-if (isProtectedRoute(req)){
-  auth().protect(); 
-} 
-});
+export default function middleware(req: Request) {
+  return withAuth(req);
+}
 
 export const config = {
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ["/dashboard"],
 };
