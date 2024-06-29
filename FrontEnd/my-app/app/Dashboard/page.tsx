@@ -3,7 +3,7 @@ import { ClerkProvider, useUser, SignIn } from '@clerk/clerk-react';
 import DisplayUserDetails from './userDetails';
 export default function Page() {
 
-
+  
   
   // if (!user) return null;
   return (
